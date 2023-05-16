@@ -1,6 +1,6 @@
 // See README.md for license details.
 
-package gcd
+package cordicLog
 
 import chisel3._
 import chiseltest._
@@ -15,13 +15,14 @@ import chisel3.experimental.BundleLiterals._
   * }}}
   * From a terminal shell use:
   * {{{
-  * sbt 'testOnly gcd.GCDSpec'
+  * sbt 'testOnly cordicLog.CordicLogSpec'
+  * sbt test
   * }}}
   */
-class GCDSpec extends AnyFreeSpec with ChiselScalatestTester {
+class CordicLogSpec extends AnyFreeSpec with ChiselScalatestTester {
 
-  "Gcd should calculate proper greatest common denominator" in {
-    test(new DecoupledGcd(16)) { dut =>
+  "cordicLog shall calculate log in pipelined fashion using lookout tables" in {
+    test(new CordicLog(16)) { dut =>
       dut.input.initSource()
       dut.input.setSourceClock(dut.clock)
       dut.output.initSink()
